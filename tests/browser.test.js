@@ -4,7 +4,7 @@ require('geckodriver');
 const fileUnderTest = 'file://' + __dirname.replace(/ /g, '%20') + '/../dist/index.html';
 const defaultTimeout = 10000;
 let driver;
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5; // 5 minuter
+//jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5; // 5 minuter
 
 // Det här körs innan vi kör testerna för att säkerställa att Firefox är igång
 beforeAll(async () => {
@@ -30,5 +30,15 @@ describe('Clicking "Pusha till stacken"', () => {
 		let alert = await driver.switchTo().alert();
 		await alert.sendKeys("Bananer");
 		await alert.accept();
+	});
+});
+
+//Trycker på knappen och därefter på okej knappen i propmten.
+describe('Clicking "Poppa stacken!"', () => {
+	it('Should open a prompt box', async () => {
+		let pop = await driver.findElement(By.id('pop'));
+		await pop.click();
+		let alert = await driver.switchTo().alert();
+		await alert.accept()
 	});
 });
